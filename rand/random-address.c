@@ -34,7 +34,7 @@ retry:	tries++;
 		map->prot = PROT_READ | PROT_WRITE;
 	} else {
 		obj = get_random_object(OBJ_SYSV_SHM, OBJ_GLOBAL);
-		if (obj->sysv_shm.size < size)
+		if (!obj || obj->sysv_shm.size < size)
 			goto retry;
 		addr = obj->sysv_shm.ptr;
 	}
